@@ -1,0 +1,36 @@
+{
+  "expo": {
+    "name": "AppTech Hub",
+    "slug": "apptech-hub",
+    "version": "1.0.0",
+    "scheme": "apptechhub",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.apptechhub.app"
+    },
+    "android": {
+      "package": "com.apptechhub.app",
+      "adaptiveIcon": {
+        "backgroundColor": "#F8F9FC",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "predictiveBackGestureEnabled": false
+    },
+    "web": {
+      "favicon": "./assets/favicon.png",
+      "bundler": "metro"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-splash-screen"
+    ],
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
+}

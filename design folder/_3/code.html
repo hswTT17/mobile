@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+
+<html lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AppTech Hub - 앱테크 허브</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Hanken+Grotesk:wght@600;700;800&amp;family=Geist:wght@500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary-fixed": "#dce1ff",
+                    "primary": "#1550d3",
+                    "on-primary-fixed-variant": "#003cad",
+                    "on-tertiary-container": "#f7fff3",
+                    "surface-container": "#edeef1",
+                    "secondary-container": "#dde3ee",
+                    "on-surface-variant": "#434654",
+                    "on-surface": "#191c1e",
+                    "surface-container-low": "#f2f3f6",
+                    "primary-container": "#3c6bed",
+                    "background": "#f8f9fc",
+                    "secondary-fixed": "#dde3ee",
+                    "tertiary-fixed": "#6bff8f",
+                    "on-secondary-fixed-variant": "#414750",
+                    "on-secondary": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "outline": "#737686",
+                    "surface-variant": "#e1e2e5",
+                    "surface-container-highest": "#e1e2e5",
+                    "on-primary-fixed": "#00164d",
+                    "inverse-primary": "#b5c4ff",
+                    "inverse-surface": "#2e3133",
+                    "error-container": "#ffdad6",
+                    "on-tertiary-fixed": "#002109",
+                    "secondary": "#585f68",
+                    "on-tertiary-fixed-variant": "#005321",
+                    "inverse-on-surface": "#f0f1f4",
+                    "primary-fixed-dim": "#b5c4ff",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary": "#006b2d",
+                    "on-primary-container": "#fffbff",
+                    "on-primary": "#ffffff",
+                    "surface": "#f8f9fc",
+                    "outline-variant": "#c3c5d7",
+                    "on-background": "#191c1e",
+                    "surface-dim": "#d9dadd",
+                    "surface-container-high": "#e7e8eb",
+                    "on-secondary-fixed": "#161c24",
+                    "error": "#ba1a1a",
+                    "tertiary-container": "#00873b",
+                    "tertiary-fixed-dim": "#4ae176",
+                    "on-secondary-container": "#5e656e",
+                    "on-error-container": "#93000a",
+                    "on-error": "#ffffff",
+                    "surface-bright": "#f8f9fc",
+                    "surface-tint": "#1a53d6",
+                    "secondary-fixed-dim": "#c1c7d1"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "xxl": "24px",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "unit": "4px",
+                    "stack-md": "16px",
+                    "stack-lg": "32px",
+                    "stack-sm": "8px",
+                    "container-padding": "20px",
+                    "gutter": "16px",
+                    "section-gap": "48px"
+            },
+            "fontFamily": {
+                    "headline-lg": ["Hanken Grotesk"],
+                    "body-md": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "label-sm": ["Geist"],
+                    "headline-lg-mobile": ["Hanken Grotesk"],
+                    "label-md": ["Geist"],
+                    "headline-md": ["Hanken Grotesk"],
+                    "display-lg": ["Hanken Grotesk"]
+            },
+            "fontSize": {
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.03em", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["26px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #f8f9fc;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        .glass-nav {
+            background: rgba(248, 249, 252, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .custom-shadow {
+            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.04);
+        }
+        .active-scale:active {
+            transform: scale(0.96);
+        }
+        ::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="font-body-md text-on-surface mb-24">
+<!-- Top App Bar (Shared Component Logic) -->
+<header class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl border-b border-outline-variant/30">
+<div class="flex justify-between items-center px-container-padding py-stack-md w-full max-w-7xl mx-auto">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary cursor-pointer active-scale">grid_view</span>
+<h1 class="text-headline-md font-headline-md font-bold text-primary">앱테크 허브</h1>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer active-scale">search</span>
+<div class="relative">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer active-scale">notifications</span>
+<span class="absolute top-0 right-0 w-2 h-2 bg-error rounded-full"></span>
+</div>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant active-scale cursor-pointer">
+<img class="w-full h-full object-cover" data-alt="A professional studio portrait of a friendly young Korean tech enthusiast, minimalist clean aesthetic, soft high-key lighting, wearing a simple white linen shirt, set against a pristine light grey background to match the AppTech Hub visual style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCOmSDTDIb7HbK1K5L7r_8C3_RjsgFtm_lxm_vItn3yAsecNM5aq6JIXTY0uhMn4yOQLFES88C6CZXQmAy4vusmP6Ksx59lK7EBN9kWcOjv5cFrod3k5Ttl9fRlLILb6ly0xRhXqTh0x5mj3AW_LBUzKh8j-MPHn2r-jrFaLQORM1H36prl16L0XLjcJNbXTymgpSPxaljJpeWBEynbjTCEXtw_nmR6x0N8e6JCgtX_N7kDIeML8LEJ8A"/>
+</div>
+</div>
+</div>
+</header>
+<main class="pt-24 px-container-padding max-w-7xl mx-auto space-y-section-gap">
+<!-- Hero Section -->
+<section class="space-y-stack-md">
+<h2 class="text-headline-lg-mobile font-headline-lg-mobile text-on-surface">오늘 받을 수 있는 혜택</h2>
+<div class="bg-surface-container-lowest p-6 rounded-xxl custom-shadow border border-outline-variant/20 relative overflow-hidden group">
+<div class="relative z-10 flex flex-col md:flex-row justify-between md:items-end gap-6">
+<div class="space-y-stack-sm">
+<p class="text-label-md font-label-md text-on-surface-variant">오늘 예상 수익</p>
+<p class="text-display-lg font-display-lg text-primary">₩12,450</p>
+</div>
+<div class="flex-1 max-w-sm space-y-stack-sm">
+<div class="flex justify-between items-center">
+<span class="text-label-md font-label-md text-on-surface-variant">완료한 미션: 8/12</span>
+<span class="text-label-md font-label-md font-bold text-tertiary">66%</span>
+</div>
+<div class="w-full h-3 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-tertiary-container rounded-full w-2/3 transition-all duration-1000 ease-out"></div>
+</div>
+</div>
+</div>
+<!-- Subtle Gradient Glow -->
+<div class="absolute -right-20 -top-20 w-64 h-64 bg-primary-fixed/30 blur-[100px] rounded-full"></div>
+</div>
+</section>
+<!-- Grid: Benefit Categories -->
+<section class="grid grid-cols-4 md:grid-cols-8 gap-gutter">
+<!-- Item 1 -->
+<div class="flex flex-col items-center gap-2 active-scale cursor-pointer group">
+<div class="w-14 h-14 bg-surface-container-low rounded-xl flex items-center justify-center group-hover:bg-primary-container/10 transition-colors">
+<span class="material-symbols-outlined text-primary text-[28px]">event_available</span>
+</div>
+<div class="text-center">
+<p class="text-label-sm font-label-sm">출석체크</p>
+<p class="text-label-sm font-bold text-primary">+₩50</p>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="flex flex-col items-center gap-2 active-scale cursor-pointer group">
+<div class="w-14 h-14 bg-surface-container-low rounded-xl flex items-center justify-center group-hover:bg-primary-container/10 transition-colors">
+<span class="material-symbols-outlined text-primary text-[28px]">play_circle</span>
+</div>
+<div class="text-center">
+<p class="text-label-sm font-label-sm">광고보기</p>
+<p class="text-label-sm font-bold text-primary">+₩30</p>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="flex flex-col items-center gap-2 active-scale cursor-pointer group">
+<div class="w-14 h-14 bg-surface-container-low rounded-xl flex items-center justify-center group-hover:bg-primary-container/10 transition-colors">
+<span class="material-symbols-outlined text-primary text-[28px]">directions_walk</span>
+</div>
+<div class="text-center">
+<p class="text-label-sm font-label-sm">걷기</p>
+<p class="text-label-sm font-bold text-primary">+₩100</p>
+</div>
+</div>
+<!-- Item 4 -->
+<div class="flex flex-col items-center gap-2 active-scale cursor-pointer group">
+<div class="w-14 h-14 bg-surface-container-low rounded-xl flex items-center justify-center group-hover:bg-primary-container/10 transition-colors">
+<span class="material-symbols-outlined text-primary text-[28px]">assignment</span>
+</div>
+<div class="text-center">
+<p class="text-label-sm font-label-sm">설문조사</p>
+<p class="text-label-sm font-bold text-primary">+₩500</p>
+</div>
+</div>
+<!-- Item 5 -->
+<div class="flex flex-col items-center gap-2 active-scale cursor-pointer group">
+<div class="w-14 h-14 bg-surface-container-low rounded-xl flex items-center justify-center group-hover:bg-primary-container/10 transition-colors">
+<span class="material-symbols-outlined text-primary text-[28px]">quiz</span>
+</div>
+<div class="text-center">
+<p class="text-label-sm font-label-sm">퀴즈</p>
+<p class="text-label-sm font-bold text-primary">+₩40</p>
+</div>
+</div>
+<!-- Item 6 -->
+<div class="flex flex-col items-center gap-2 active-scale cursor-pointer group">
+<div class="w-14 h-14 bg-surface-container-low rounded-xl flex items-center justify-center group-hover:bg-primary-container/10 transition-colors">
+<span class="material-symbols-outlined text-primary text-[28px]">shopping_bag</span>
+</div>
+<div class="text-center">
+<p class="text-label-sm font-label-sm">쇼핑</p>
+<p class="text-label-sm font-bold text-primary">+5%</p>
+</div>
+</div>
+<!-- Item 7 -->
+<div class="flex flex-col items-center gap-2 active-scale cursor-pointer group">
+<div class="w-14 h-14 bg-surface-container-low rounded-xl flex items-center justify-center group-hover:bg-primary-container/10 transition-colors">
+<span class="material-symbols-outlined text-primary text-[28px]">credit_card</span>
+</div>
+<div class="text-center">
+<p class="text-label-sm font-label-sm">카드혜택</p>
+<p class="text-label-sm font-bold text-primary">포인트</p>
+</div>
+</div>
+<!-- Item 8 -->
+<div class="flex flex-col items-center gap-2 active-scale cursor-pointer group">
+<div class="w-14 h-14 bg-surface-container-low rounded-xl flex items-center justify-center group-hover:bg-primary-container/10 transition-colors">
+<span class="material-symbols-outlined text-primary text-[28px]">account_balance</span>
+</div>
+<div class="text-center">
+<p class="text-label-sm font-label-sm">은행 이벤트</p>
+<p class="text-label-sm font-bold text-primary">이율업</p>
+</div>
+</div>
+</section>
+<!-- 실시간 인기 이벤트 (Horizontal Scroll) -->
+<section class="space-y-stack-md">
+<div class="flex justify-between items-center">
+<h3 class="text-headline-md font-headline-md text-on-surface">실시간 인기 이벤트</h3>
+<span class="material-symbols-outlined text-on-surface-variant active-scale cursor-pointer">chevron_right</span>
+</div>
+<div class="flex overflow-x-auto gap-gutter pb-4 -mx-container-padding px-container-padding scroll-smooth">
+<!-- Card 1 -->
+<div class="flex-shrink-0 w-72 h-44 rounded-xxl overflow-hidden bg-primary-container p-6 relative group cursor-pointer active-scale">
+<div class="relative z-10 space-y-1">
+<span class="bg-white/20 backdrop-blur-md text-white text-[10px] px-2 py-0.5 rounded-full uppercase font-bold tracking-wider">Trending</span>
+<p class="text-white font-bold text-lg leading-tight">신규 가입하고<br/>10,000원 즉시 지급</p>
+<p class="text-white/70 text-xs mt-2">오늘만 혜택 2배</p>
+</div>
+
+</div>
+<!-- Card 2 -->
+<div class="flex-shrink-0 w-72 h-44 rounded-xxl overflow-hidden bg-tertiary-container p-6 relative group cursor-pointer active-scale">
+<div class="relative z-10 space-y-1">
+<span class="bg-white/20 backdrop-blur-md text-white text-[10px] px-2 py-0.5 rounded-full uppercase font-bold tracking-wider">Gift</span>
+<p class="text-white font-bold text-lg leading-tight">친구 초대하고<br/>스타벅스 쿠폰 받기</p>
+<p class="text-white/70 text-xs mt-2">3명 초대시 100% 당첨</p>
+</div>
+<div class="absolute right-0 bottom-0 w-32 h-32 bg-white/10 blur-2xl rounded-full"></div>
+</div>
+<!-- Card 3 -->
+<div class="flex-shrink-0 w-72 h-44 rounded-xxl overflow-hidden bg-on-surface-variant p-6 relative group cursor-pointer active-scale">
+<div class="relative z-10 space-y-1">
+<span class="bg-white/20 backdrop-blur-md text-white text-[10px] px-2 py-0.5 rounded-full uppercase font-bold tracking-wider">Limited</span>
+<p class="text-white font-bold text-lg leading-tight">주말 한정 퀴즈쇼<br/>총 상금 500만원</p>
+<p class="text-white/70 text-xs mt-2">오후 8시 정각 시작</p>
+</div>
+<div class="absolute inset-0 bg-gradient-to-br from-indigo-500/20 to-transparent"></div>
+</div>
+</div>
+</section>
+<!-- 오늘 종료되는 이벤트 (List style) -->
+<section class="space-y-stack-md">
+<h3 class="text-headline-md font-headline-md text-on-surface">오늘 종료되는 이벤트</h3>
+<div class="space-y-gutter">
+<!-- Row 1 -->
+<div class="bg-surface-container-lowest p-5 rounded-xxl custom-shadow border border-outline-variant/10 flex items-center gap-4 active-scale cursor-pointer">
+<div class="w-16 h-16 rounded-xl bg-surface-container overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A high-quality 3D render of a golden treasure chest opening with glowing blue light emitting from inside, sleek modern UI asset style, soft shadows, vibrant primary blue and gold palette." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4ht_LfLVppG-YZrtax8lQEtrcvJtmd4u1U6iNMuflbwFtjow9iTHlnT-57OgKYo9LFyp7YpBKm311oVYMR6o05uaIqoMwjU7gV3xueunrPkdrJzbENsFNi5wSz6JgJZvSb3q6c7fLQzvvhtb2H11onOWt2v-kkzfkpQ2BDg5qLNPl5PXbLRACeQvokHZ3mv2QK0hNk1_aqPtuanFn-tKArIxDgAvFwiqZuG-c3QzGPtoXicGeeFKd1w"/>
+</div>
+<div class="flex-1">
+<div class="flex items-center gap-2 mb-1">
+<span class="text-error text-[10px] font-bold border border-error px-1.5 py-0.5 rounded uppercase">D-Day</span>
+<p class="text-label-sm font-label-sm text-error font-bold">03:14:52</p>
+</div>
+<p class="text-body-md font-bold text-on-surface">럭키드로우 1,000만 포인트</p>
+<p class="text-label-md text-on-surface-variant">응모권 3장 보유 중</p>
+</div>
+<span class="material-symbols-outlined text-outline-variant">chevron_right</span>
+</div>
+<!-- Row 2 -->
+<div class="bg-surface-container-lowest p-5 rounded-xxl custom-shadow border border-outline-variant/10 flex items-center gap-4 active-scale cursor-pointer">
+<div class="w-16 h-16 rounded-xl bg-surface-container overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A minimalist tech icon showing a shopping bag with a percent symbol, styled in a clean glassmorphic aesthetic with a soft blue and white gradient, high-end commercial mobile app vibe." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBxQROGCOVsOFx2DgSx6uhZRTduiegenRMiM1WrZ8bi0NrFaxx_XxAOL1eDER018LeRIrRzJp6fOEcti6rLtA0LLrzy3UHs7O_eAWABCedDC2mBb28yXCUTtHJ788i5Heh3aZ_WKkEIGcC7-meJlUgO-f5M56hTh1fH8KbttS_cMA1ZCpnWAVVIFycNX83uWhPy5DBbecVJCq8VWyqh5tGiDKRMQgFaQPrpF-WcFJ0nKTVaz3MdcMk_Cw"/>
+</div>
+<div class="flex-1">
+<div class="flex items-center gap-2 mb-1">
+<span class="text-error text-[10px] font-bold border border-error px-1.5 py-0.5 rounded uppercase">D-Day</span>
+<p class="text-label-sm font-label-sm text-error font-bold">08:45:10</p>
+</div>
+<p class="text-body-md font-bold text-on-surface">브랜드 적립 10% 캐시백</p>
+<p class="text-label-md text-on-surface-variant">나이키, 애플, 올리브영 외</p>
+</div>
+<span class="material-symbols-outlined text-outline-variant">chevron_right</span>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Bar (Shared Component Logic) -->
+<nav class="fixed bottom-0 left-0 w-full glass-nav pt-3 pb-safe z-50 border-t border-outline-variant/10">
+<div class="flex justify-around items-center px-4 max-w-7xl mx-auto">
+<!-- Home (Active) -->
+<div class="flex flex-col items-center justify-center text-primary font-semibold active-scale cursor-pointer">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="text-label-sm font-label-sm mt-1">홈</span>
+</div>
+<!-- Event -->
+<div class="flex flex-col items-center justify-center text-on-secondary-container opacity-60 active-scale cursor-pointer hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined">redeem</span>
+<span class="text-label-sm font-label-sm mt-1">이벤트</span>
+</div>
+<!-- Search -->
+<div class="flex flex-col items-center justify-center text-on-secondary-container opacity-60 active-scale cursor-pointer hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined">search</span>
+<span class="text-label-sm font-label-sm mt-1">검색</span>
+</div>
+<!-- Community -->
+<div class="flex flex-col items-center justify-center text-on-secondary-container opacity-60 active-scale cursor-pointer hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined">groups</span>
+<span class="text-label-sm font-label-sm mt-1">커뮤니티</span>
+</div>
+<!-- My -->
+<div class="flex flex-col items-center justify-center text-on-secondary-container opacity-60 active-scale cursor-pointer hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined">person</span>
+<span class="text-label-sm font-label-sm mt-1">마이</span>
+</div>
+</div>
+</nav>
+<!-- Floating Action Button for Task (AppTech context) -->
+<button class="fixed right-6 bottom-24 w-14 h-14 bg-primary text-white rounded-full shadow-lg flex items-center justify-center active-scale transition-transform hover:scale-105 z-40">
+<span class="material-symbols-outlined text-[28px]">add_task</span>
+</button>
+<script>
+        // Simple Interaction for navigation items
+        document.querySelectorAll('nav > div > div').forEach(item => {
+            item.addEventListener('click', function() {
+                document.querySelectorAll('nav > div > div').forEach(i => {
+                    i.classList.remove('text-primary', 'font-semibold');
+                    i.classList.add('text-on-secondary-container', 'opacity-60');
+                });
+                this.classList.remove('text-on-secondary-container', 'opacity-60');
+                this.classList.add('text-primary', 'font-semibold');
+            });
+        });
+
+        // Micro-interaction for Progress Bar on Load
+        window.addEventListener('DOMContentLoaded', () => {
+            const bar = document.querySelector('.bg-tertiary-container');
+            setTimeout(() => {
+                bar.style.width = '66.6%';
+            }, 300);
+        });
+    </script>
+</body></html>

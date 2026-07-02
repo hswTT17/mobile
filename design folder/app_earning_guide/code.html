@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>App Detail - AppTech Hub</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Hanken+Grotesk:wght@100..900&family=Inter:wght@100..900&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Hanken+Grotesk:wght@100..900&family=Inter:wght@100..900&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-high": "#e7e8eb",
+                    "inverse-surface": "#2e3133",
+                    "on-secondary-fixed-variant": "#414750",
+                    "background": "#f8f9fc",
+                    "on-surface": "#191c1e",
+                    "primary-fixed": "#dce1ff",
+                    "on-secondary": "#ffffff",
+                    "secondary-fixed-dim": "#c1c7d1",
+                    "on-secondary-container": "#5e656e",
+                    "secondary-fixed": "#dde3ee",
+                    "on-secondary-fixed": "#161c24",
+                    "tertiary-fixed": "#6bff8f",
+                    "surface-bright": "#f8f9fc",
+                    "on-primary": "#ffffff",
+                    "tertiary-fixed-dim": "#4ae176",
+                    "primary": "#1550d3",
+                    "on-surface-variant": "#434654",
+                    "outline": "#737686",
+                    "primary-fixed-dim": "#b5c4ff",
+                    "surface-tint": "#1a53d6",
+                    "surface-variant": "#e1e2e5",
+                    "on-tertiary-fixed": "#002109",
+                    "surface-dim": "#d9dadd",
+                    "on-background": "#191c1e",
+                    "surface-container-highest": "#e1e2e5",
+                    "inverse-on-surface": "#f0f1f4",
+                    "on-tertiary-fixed-variant": "#005321",
+                    "on-primary-fixed": "#00164d",
+                    "on-error": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "surface-container-low": "#f2f3f6",
+                    "error-container": "#ffdad6",
+                    "surface-container-lowest": "#ffffff",
+                    "on-primary-fixed-variant": "#003cad",
+                    "tertiary": "#006b2d",
+                    "surface-container": "#edeef1",
+                    "on-tertiary-container": "#f7fff3",
+                    "secondary-container": "#dde3ee",
+                    "secondary": "#585f68",
+                    "tertiary-container": "#00873b",
+                    "on-tertiary": "#ffffff",
+                    "primary-container": "#3c6bed",
+                    "surface": "#f8f9fc",
+                    "outline-variant": "#c3c5d7",
+                    "inverse-primary": "#b5c4ff",
+                    "on-primary-container": "#fffbff",
+                    "error": "#ba1a1a"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "stack-sm": "8px",
+                    "stack-md": "16px",
+                    "unit": "4px",
+                    "container-padding": "20px",
+                    "stack-lg": "32px",
+                    "section-gap": "48px",
+                    "gutter": "16px"
+            },
+            "fontFamily": {
+                    "label-sm": ["Geist"],
+                    "headline-md": ["Hanken Grotesk"],
+                    "headline-lg": ["Hanken Grotesk"],
+                    "display-lg": ["Hanken Grotesk"],
+                    "label-md": ["Geist"],
+                    "headline-lg-mobile": ["Hanken Grotesk"],
+                    "body-lg": ["Inter"],
+                    "body-md": ["Inter"]
+            },
+            "fontSize": {
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.03em", "fontWeight": "600"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["26px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #f8f9fc;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .glass-nav {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .custom-scroll-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .active-interaction:active {
+            transform: scale(0.96);
+            transition: transform 0.1s ease-out;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body-md text-on-surface select-none">
+<!-- Top App Bar -->
+<header class="fixed top-0 w-full z-50 bg-surface/80 dark:bg-surface-dim/80 backdrop-blur-xl border-b border-outline-variant/30 dark:border-outline/20 shadow-sm dark:shadow-none">
+<div class="flex justify-between items-center px-container-padding py-stack-md w-full max-w-7xl mx-auto">
+<button class="active-interaction text-primary dark:text-primary-fixed">
+<span class="material-symbols-outlined" style="font-size: 28px;">chevron_left</span>
+</button>
+<h1 class="text-headline-md font-headline-md font-bold text-primary dark:text-primary-fixed">App Detail</h1>
+<button class="active-interaction text-primary dark:text-primary-fixed">
+<span class="material-symbols-outlined" style="font-size: 24px;">share</span>
+</button>
+</div>
+</header>
+<main class="pt-24 pb-32 px-container-padding max-w-4xl mx-auto space-y-section-gap">
+<!-- App Identity Header -->
+<section class="flex flex-col md:flex-row gap-gutter items-start">
+<div class="relative w-24 h-24 md:w-32 md:h-32 shrink-0 rounded-[24px] overflow-hidden shadow-sm border border-outline-variant/30">
+<img class="w-full h-full object-cover" data-alt="A premium 3D app icon design for a fitness and rewards application called Cash Walk. The icon features a stylized golden coin with a minimalist walking sneaker silhouette in the center. The background is a clean, vibrant gradient of electric blue and soft indigo. High-fidelity rendering with soft studio lighting and subtle metallic reflections, following a modern iOS aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCAt6XH0SmsFtiHCJvI0arVWkuIS_ZsXuCkr7RKNExPtPS6FB4ZAEMjLN_dp7ZZNYYwDptzbHM2KoSrgeylkLdHoSuCtOpFWAEKMuSUUKj4kVlfiu4w-pEYupIz2-f1WaQcb5Vj1sDAe6WUMvu5AIFrpdIhXgJ0qeAtav-kvGSErWicp0u3bl3tPgHfJoKaeQ1WN_U-XBaanjBM0309a8NrrTrGQOT4ea6iEKb17dJsFDJ8tWVR-aQrdQ"/>
+</div>
+<div class="flex flex-col justify-center pt-2">
+<h2 class="text-headline-lg-mobile md:text-headline-lg font-headline-lg text-on-surface tracking-tight">Cash Walk</h2>
+<p class="text-primary font-medium text-body-md">Walk & Earn Rewards Daily</p>
+<div class="flex items-center mt-2 gap-stack-sm">
+<div class="flex items-center text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px] text-primary" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="ml-1 text-label-md font-label-md">4.8</span>
+</div>
+<span class="text-outline-variant">•</span>
+<span class="text-label-md font-label-md text-on-surface-variant">10M+ Downloads</span>
+</div>
+</div>
+</section>
+<!-- Stats Bar -->
+<section class="grid grid-cols-3 gap-stack-sm bg-surface-container-lowest rounded-xl p-stack-md border border-outline-variant/20 shadow-[0_10px_30px_rgba(0,0,0,0.04)]">
+<div class="flex flex-col items-center text-center space-y-1">
+<span class="text-label-sm text-on-secondary-container">Max Monthly</span>
+<span class="text-label-md font-bold text-primary">₩30,000+</span>
+</div>
+<div class="flex flex-col items-center text-center space-y-1 border-x border-outline-variant/20">
+<span class="text-label-sm text-on-secondary-container">Min Payout</span>
+<span class="text-label-md font-bold text-on-surface">₩1,000</span>
+</div>
+<div class="flex flex-col items-center text-center space-y-1">
+<span class="text-label-sm text-on-secondary-container">Method</span>
+<span class="text-label-md font-bold text-tertiary">Walking</span>
+</div>
+</section>
+<!-- Why Users Love It (Pros) -->
+<section class="space-y-stack-md">
+<h3 class="text-headline-md font-headline-md">Why users love it</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-stack-md">
+<div class="bg-surface-container-low p-stack-md rounded-xl flex items-start gap-stack-md border border-outline-variant/10">
+<div class="bg-tertiary/10 p-2 rounded-full text-tertiary">
+<span class="material-symbols-outlined">bolt</span>
+</div>
+<div>
+<p class="font-bold text-body-md">Battery Efficient</p>
+<p class="text-label-md text-on-surface-variant mt-1 leading-relaxed">Runs smoothly in the background without draining your phone's battery life.</p>
+</div>
+</div>
+<div class="bg-surface-container-low p-stack-md rounded-xl flex items-start gap-stack-md border border-outline-variant/10">
+<div class="bg-primary/10 p-2 rounded-full text-primary">
+<span class="material-symbols-outlined">redeem</span>
+</div>
+<div>
+<p class="font-bold text-body-md">Instant Coupons</p>
+<p class="text-label-md text-on-surface-variant mt-1 leading-relaxed">Redeem your points instantly for coffee, snacks, or gift cards.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Keep in Mind (Cons) -->
+<section class="space-y-stack-md">
+<h3 class="text-headline-md font-headline-md">Keep in mind</h3>
+<ul class="space-y-stack-sm">
+<li class="flex items-center gap-stack-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-error" style="font-size: 20px;">info</span>
+<span class="text-body-md">Daily step limit of 10,000 applies for earnings.</span>
+</li>
+<li class="flex items-center gap-stack-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-error" style="font-size: 20px;">info</span>
+<span class="text-body-md">Occasional ads might appear during point redemption.</span>
+</li>
+</ul>
+</section>
+<!-- User Reviews -->
+<section class="space-y-stack-lg">
+<div class="flex justify-between items-center">
+<h3 class="text-headline-md font-headline-md">User reviews</h3>
+<button class="text-primary text-label-md font-label-md">See all</button>
+</div>
+<div class="space-y-stack-md">
+<!-- Review Card -->
+<div class="bg-surface-container-lowest p-stack-lg rounded-2xl border border-outline-variant/20 shadow-sm">
+<div class="flex justify-between mb-stack-sm">
+<span class="font-bold text-body-md">HealthyHabit22</span>
+<div class="flex text-primary">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+</div></div></div></div></section></main></body></html>

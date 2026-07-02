@@ -1,0 +1,27 @@
+# AppTech Hub Product Requirements (PRD)
+
+## Project Overview
+AppTech Hub is a unified platform for discovering and managing all "App-tech" (mobile reward apps) benefits in South Korea. It eliminates the need to open dozens of apps individually by providing a single dashboard for daily rewards, events, and missions.
+
+## Core Value
+"Never miss out on money and benefits you can get today."
+
+## Target Style
+- Apple: Clean layout, premium feel.
+- Toss: Friendly interaction, vibrant primary color.
+- Notion: Minimalist structure.
+- Linear: High-fidelity precision.
+
+## Key Screens to Generate
+1. **Home (Main)**: Dashboard with daily expected earnings, mission progress, and categorized reward cards.
+2. **Search**: Trending apps, categories, and smart search.
+3. **Events**: Curated list of high-value and closing-soon events.
+4. **App Detail**: In-depth review, earnings potential, and direct participation.
+5. **Community**: Earnings verification, tips, and referral sharing.
+6. **My Page**: Detailed earnings analytics and cumulative stats.
+
+## Design Specs
+- **Primary**: #4F7CFF
+- **Corner Radius**: 24px (Cards), 12px (Buttons)
+- **Shadows**: Soft, multi-layered elevation.
+- **Font**: Pretendard/Inter.

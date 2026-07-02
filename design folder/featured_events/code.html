@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>Events - AppTech Hub</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Hanken+Grotesk:wght@600;700;800&family=Inter:wght@400;500;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Hanken+Grotesk:wght@100..900&family=Inter:wght@100..900&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        
+        .glass-effect {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        @keyframes ripple {
+            0% { transform: scale(0); opacity: 0.5; }
+            100% { transform: scale(4); opacity: 0; }
+        }
+
+        .ripple-container {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .active-tab-indicator {
+            view-transition-name: active-tab;
+        }
+
+        .reward-gradient {
+            background: linear-gradient(135deg, #1550d3 0%, #3c6bed 100%);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-high": "#e7e8eb",
+                        "inverse-surface": "#2e3133",
+                        "on-secondary-fixed-variant": "#414750",
+                        "background": "#f8f9fc",
+                        "on-surface": "#191c1e",
+                        "primary-fixed": "#dce1ff",
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed-dim": "#c1c7d1",
+                        "on-secondary-container": "#5e656e",
+                        "secondary-fixed": "#dde3ee",
+                        "on-secondary-fixed": "#161c24",
+                        "tertiary-fixed": "#6bff8f",
+                        "surface-bright": "#f8f9fc",
+                        "on-primary": "#ffffff",
+                        "tertiary-fixed-dim": "#4ae176",
+                        "primary": "#1550d3",
+                        "on-surface-variant": "#434654",
+                        "outline": "#737686",
+                        "primary-fixed-dim": "#b5c4ff",
+                        "surface-tint": "#1a53d6",
+                        "surface-variant": "#e1e2e5",
+                        "on-tertiary-fixed": "#002109",
+                        "surface-dim": "#d9dadd",
+                        "on-background": "#191c1e",
+                        "surface-container-highest": "#e1e2e5",
+                        "inverse-on-surface": "#f0f1f4",
+                        "on-tertiary-fixed-variant": "#005321",
+                        "on-primary-fixed": "#00164d",
+                        "on-error": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "surface-container-low": "#f2f3f6",
+                        "error-container": "#ffdad6",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed-variant": "#003cad",
+                        "tertiary": "#006b2d",
+                        "surface-container": "#edeef1",
+                        "on-tertiary-container": "#f7fff3",
+                        "secondary-container": "#dde3ee",
+                        "secondary": "#585f68",
+                        "tertiary-container": "#00873b",
+                        "on-tertiary": "#ffffff",
+                        "primary-container": "#3c6bed",
+                        "surface": "#f8f9fc",
+                        "outline-variant": "#c3c5d7",
+                        "inverse-primary": "#b5c4ff",
+                        "on-primary-container": "#fffbff",
+                        "error": "#ba1a1a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-sm": "8px",
+                        "stack-md": "16px",
+                        "unit": "4px",
+                        "container-padding": "20px",
+                        "stack-lg": "32px",
+                        "section-gap": "48px",
+                        "gutter": "16px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Geist"],
+                        "headline-md": ["Hanken Grotesk"],
+                        "headline-lg": ["Hanken Grotesk"],
+                        "display-lg": ["Hanken Grotesk"],
+                        "label-md": ["Geist"],
+                        "headline-lg-mobile": ["Hanken Grotesk"],
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.03em", "fontWeight": "600"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                        "headline-lg-mobile": ["26px", {"lineHeight": "32px", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body-md min-h-screen pb-32">
+<!-- Top App Bar -->
+<header class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl border-b border-outline-variant/30 shadow-sm transition-all duration-300">
+<div class="flex justify-between items-center px-container-padding py-stack-md w-full max-w-7xl mx-auto">
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-full hover:bg-surface-container-low transition-colors active:scale-95">
+<span class="material-symbols-outlined text-primary">grid_view</span>
+</button>
+<h1 class="text-headline-md font-headline-md font-bold text-primary">AppTech Hub</h1>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 rounded-full hover:bg-surface-container-low transition-colors active:scale-95">
+<span class="material-symbols-outlined text-on-surface-variant">search</span>
+</button>
+<button class="p-2 rounded-full hover:bg-surface-container-low transition-colors active:scale-95 relative">
+<span class="material-symbols-outlined text-on-surface-variant">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full border-2 border-surface"></span>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="pt-24 px-container-padding max-w-7xl mx-auto w-full">
+<!-- Tabs Navigation -->
+<div class="sticky top-[72px] z-40 bg-background/95 backdrop-blur-sm py-stack-md -mx-container-padding px-container-padding mb-stack-lg overflow-x-auto no-scrollbar">
+<div class="flex gap-stack-sm items-center min-w-max">
+<button class="px-6 py-2.5 rounded-full bg-primary text-on-primary font-label-md text-label-md shadow-lg shadow-primary/20 active:scale-95 transition-all">All</button>
+<button class="px-6 py-2.5 rounded-full bg-surface-container-lowest text-on-surface-variant font-label-md text-label-md border border-outline-variant/30 hover:bg-surface-container-low active:scale-95 transition-all">High-Value</button>
+<button class="px-6 py-2.5 rounded-full bg-surface-container-lowest text-on-surface-variant font-label-md text-label-md border border-outline-variant/30 hover:bg-surface-container-low active:scale-95 transition-all">New</button>
+<button class="px-6 py-2.5 rounded-full bg-surface-container-lowest text-on-surface-variant font-label-md text-label-md border border-outline-variant/30 hover:bg-surface-container-low active:scale-95 transition-all">Closing Soon</button>
+</div>
+</div>
+<!-- Featured Banner (High-Fidelity Interaction) -->
+<section class="mb-section-gap">
+<div class="relative w-full h-[240px] md:h-[320px] rounded-[32px] overflow-hidden shadow-2xl group cursor-pointer">
+<div class="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-700" data-alt="A vibrant digital illustration of a luxury gift box exploding with golden coins and glowing blue energy sparks. The scene is set against a deep navy blue background with soft bokeh lighting effects, creating a premium and exciting atmosphere. High-fidelity 3D render style with sharp details and cinematic lighting, embodying digital prosperity." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBBczzDocY6iSJUJE58JAJWvD48mdEwiFRrjZ4EdC-m6lrAc9rEItDXjF8vWnw3n7q6Jcn1aL5GpjGbd-CySScC92scOMksY5oGzpRb-gyiOQuSoag0-V5uYbA2yZ0ZswSJ-zyJYyV4qRkLaTEApDVxWbxRwg0_mcUIMgcNR7EJyV8u1ZFIfYW-UazjX3REaI24xkQspI6k1MTF2_vGSZjFhfDJh9i_N_q82XrsK3_1Nz8CxWLwVghNKg')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-8">
+<span class="w-fit px-3 py-1 rounded-full bg-tertiary text-on-tertiary text-label-sm font-label-sm mb-stack-sm">SPECIAL MISSION</span>
+<h2 class="text-white font-headline-lg-mobile md:text-headline-lg mb-2">Weekend Mega Raffle</h2>
+<p class="text-white/80 font-body-md mb-stack-md">Participate in 5 missions to win ₩1,000,000</p>
+<div class="flex items-center gap-4">
+<button class="px-8 py-3 rounded-full bg-white text-primary font-label-md text-label-md shadow-xl active:scale-95 transition-all">Join Now</button>
+<span class="text-white/60 text-label-sm">Ends in 02:45:12</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Event Grid -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+<!-- Event Card 1 -->
+<div class="bg-surface-container-lowest border border-outline-variant/20 rounded-[24px] overflow-hidden shadow-[0px_10px_30px_rgba(0,0,0,0.04)] hover:shadow-[0px_15px_40px_rgba(0,0,0,0.08)] transition-all group">
+<div class="relative h-48 overflow-hidden">
+<div class="w-full h-full bg-cover bg-center group-hover:scale-110 transition-transform duration-500" data-alt="A high-end studio photograph of a premium stainless steel credit card resting on a minimalist marble surface. Soft sunlight filters through a window, creating elegant shadows. The color palette is composed of cool grays, whites, and a touch of metallic blue, suggesting financial sophistication and clarity. Clean, airy composition." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA22ZHd4Rqfv440VeQ_Rg8Drp7JIFK50rWU0d26m7xHVJQ1CGs1125wOL36AI8YjvP1FWva_acH7KLlmfo09FrvuW0q9qmlokBo7RMJ158MTSzYD1GksmYAxJC5zgrmH-c4X13k85H-q-3iyj5ASuK_lw9VAsarTeFvgjrwhRnZy5lny_YsReBXpUNYrsmAThq9k-0iWfo-IbDSsfVvA_sLxWlijBRhWlYumKeKvgmN8IACQZBltEPhBg')"></div>
+<div class="absolute top-4 right-4 px-3 py-1.5 glass-effect bg-white/60 rounded-full text-primary font-bold text-label-md border border-white/40">
+                        ₩5,000 Get
+                    </div>
+</div>
+<div class="p-6">
+<div class="flex items-center gap-2 mb-stack-sm">
+<span class="px-2 py-0.5 rounded bg-secondary-container text-on-secondary-container text-label-sm font-label-sm">Finance</span>
+<span class="text-on-surface-variant text-label-sm">• 3 days left</span>
+</div>
+<h3 class="text-on-surface font-headline-md text-headline-md mb-2 group-hover:text-primary transition-colors">First Card Link Bonus</h3>
+<p class="text-on-surface-variant font-body-md mb-6">Link your first payment card and receive instant cashback rewards.</p>
+<div class="flex items-center justify-between">
+<div class="flex -space-x-2">
+<div class="w-8 h-8 rounded-full border-2 border-surface bg-surface-container-high flex items-center justify-center text-[10px] font-bold">JD</div>
+<div class="w-8 h-8 rounded-full border-2 border-surface bg-primary text-white flex items-center justify-center text-[10px] font-bold">HS</div>
+<div class="w-8 h-8 rounded-full border-2 border-surface bg-tertiary text-white flex items-center justify-center text-[10px] font-bold">+12</div>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</div>
+</div>
+</div>
+<!-- Event Card 2 -->
+<div class="bg-surface-container-lowest border border-outline-variant/20 rounded-[24px] overflow-hidden shadow-[0px_10px_30px_rgba(0,0,0,0.04)] hover:shadow-[0px_15px_40px_rgba(0,0,0,0.08)] transition-all group">
+<div class="relative h-48 overflow-hidden">
+<div class="w-full h-full bg-cover bg-center group-hover:scale-110 transition-transform duration-500" data-alt="A minimalist and bright lifestyle scene featuring a pair of modern white athletic sneakers next to a tall glass of refreshing water with lemon slices. The setting is a clean, sun-drenched wooden floor. The aesthetic is inspired by Scandinavian minimalism, emphasizing health, vitality, and fresh morning energy. Soft pastels and crisp white tones." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCRJHJSIoDvECB8IKHmlxzGjbUqVU8i52ubkxGRiNOo8NneeaESeAp9NhUxEZ8MgQHJD9r-ywuPYnGTgKljXUZnoxNXpn5Gdo1z9czrLXPMWg0RjvB_ecXYnJO6lPFe8gfMQ-x5Xf03f0RZGsat26Meqc4Nz10yz3bgbdc_igbkFvKcb19ZEmiYQo2SBUnXbD5QEVwRCRDEidQl-jVJosJXA9Lt8aocxNWPdZ_V68W9_EHgctPSQIswmg')"></div>
+<div class="absolute top-4 right-4 px-3 py-1.5 glass-effect bg-white/60 rounded-full text-primary font-bold text-label-md border border-white/40">
+                        ₩500 Get
+                    </div>
+</div>
+<div class="p-6">
+<div class="flex items-center gap-2 mb-stack-sm">
+<span class="px-2 py-0.5 rounded bg-tertiary-container/20 text-tertiary text-label-sm font-label-sm">Health</span>
+<span class="text-on-surface-variant text-label-sm">• Daily</span>
+</div>
+<h3 class="text-on-surface font-headline-md text-headline-md mb-2 group-hover:text-primary transition-colors">Morning Walk Challenge</h3>
+<p class="text-on-surface-variant font-body-md mb-6">Complete 5,000 steps before 9 AM and get daily cash benefits.</p>
+<div class="w-full h-2 bg-surface-container-high rounded-full overflow-hidden mb-4">
+<div class="w-[65%] h-full bg-tertiary rounded-full"></div>
+</div>
+<div class="flex items-center justify-between text-label-sm text-on-surface-variant">
+<span>3,250 / 5,000 steps</span>
+<span class="text-tertiary font-bold">65%</span>
+</div>
+</div>
+</div>
+<!-- Event Card 3 -->
+<div class="bg-surface-container-lowest border border-outline-variant/20 rounded-[24px] overflow-hidden shadow-[0px_10px_30px_rgba(0,0,0,0.04)] hover:shadow-[0px_15px_40px_rgba(0,0,0,0.08)] transition-all group">
+<div class="relative h-48 overflow-hidden">
+<div class="w-full h-full bg-cover bg-center group-hover:scale-110 transition-transform duration-500" data-alt="An artistic flat-lay of a gourmet coffee cup with heart latte art, placed beside a sleek smartphone displaying a colorful app interface. Surrounding them are loose coffee beans and a sprig of dried lavender on a soft linen tablecloth. Warm, inviting cafe lighting with a cozy, professional morning vibe. Rich textures and deep shadows." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBqdb-AszwMTe025dOc2pXOhIsvoOtHG6N9ZtD3fwFiWQQd3s95JL8rUCt97Lh-wDmzQLqPGCHuHbondCu1rJdpLhqz0_bERMhrrfJucxfa6FldPHii5gUsN7BH-tRn-HV9PHpK8gPhppl0KZgLvuVzRhe_SjtHz0OwQb7WbGu6li6vf06BmqadWtYdYTT1s_cd-wT7zJAX8Bcmf7KiWPk7vUGCG3We_5ztPmCVrSnGTWbpsRYGogQK2A')"></div>
+<div class="absolute top-4 right-4 px-3 py-1.5 glass-effect bg-white/60 rounded-full text-primary font-bold text-label-md border border-white/40">
+                        ₩3,000 Get
+                    </div>
+<div class="absolute top-4 left-4 px-2 py-1 bg-error text-white text-[10px] font-bold rounded uppercase">Hot</div>
+</div>
+<div class="p-6">
+<div class="flex items-center gap-2 mb-stack-sm">
+<span class="px-2 py-0.5 rounded bg-primary-container/10 text-primary text-label-sm font-label-sm">Community</span>
+<span class="text-error text-label-sm font-bold">• 2h left</span>
+</div>
+<h3 class="text-on-surface font-headline-md text-headline-md mb-2 group-hover:text-primary transition-colors">Coffee Review Mission</h3>
+<p class="text-on-surface-variant font-body-md mb-6">Write a quick review of your morning coffee and get reward points.</p>
+<button class="w-full py-3 rounded-xl border-2 border-primary text-primary font-bold hover:bg-primary hover:text-white transition-all active:scale-95">Complete Now</button>
+</div>
+</div>
+<!-- Event Card 4 -->
+<div class="bg-surface-container-lowest border border-outline-variant/20 rounded-[24px] overflow-hidden shadow-[0px_10px_30px_rgba(0,0,0,0.04)] hover:shadow-[0px_15px_40px_rgba(0,0,0,0.08)] transition-all group">
+<div class="relative h-48 overflow-hidden">
+<div class="w-full h-full bg-cover bg-center group-hover:scale-110 transition-transform duration-500" data-alt="A futuristic digital illustration of a sleek smartphone floating in mid-air, surrounded by 3D holographic icons representing various apps and notifications. The background is a clean, white tech-studio environment with soft global illumination and subtle blue accent lights. Modern, clean, and highly technical aesthetic like a high-end mobile OS presentation." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDHQ9XAk6SlFuavH832SXHYPYg4fGmQ9bWYg0sj1GQjL99UHftvD3DvUnTqIT3pEslIaxeROj8X7AZ8BdWb6EbFFaTdEJd3ogw_tM6Jcs256rMq4YEeyck_WdmV7EBJfVtKJ4Sk0Z4Y_jaJABKJVLvvoQ5wfMeLh4g3zOEprSousyB4Ou458YTNVOA5ujnIGTYVufUEZsVDmp-hNKG7bkkz_znwNLDePmvDwkZUy0bdY6znki82Q6to-g')"></div>
+<div class="absolute top-4 right-4 px-3 py-1.5 glass-effect bg-white/60 rounded-full text-primary font-bold text-label-md border border-white/40">
+                        ₩10,000 Get
+                    </div>
+<div class="absolute bottom-0 w-full h-1 bg-primary/20">
+<div class="h-full bg-primary w-[90%]"></div>
+</div>
+</div>
+<div class="p-6">
+<div class="flex items-center gap-2 mb-stack-sm">
+<span class="px-2 py-0.5 rounded bg-secondary-container text-on-secondary-container text-label-sm font-label-sm">New App</span>
+<span class="text-on-surface-variant text-label-sm">• 1,245 joined</span>
+</div>
+<h3 class="text-on-surface font-headline-md text-headline-md mb-2 group-hover:text-primary transition-colors">Beta Tester Recruitment</h3>
+<p class="text-on-surface-variant font-body-md mb-6">Be the first to try our new partner app and earn high-value rewards.</p>
+<div class="flex items-center gap-2 text-primary font-bold">
+<span class="material-symbols-outlined">verified</span>
+<span class="text-label-md">Verified Partner</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Floating Action Button -->
+<button class="fixed bottom-24 right-6 w-14 h-14 bg-primary text-on-primary rounded-2xl shadow-xl shadow-primary/40 flex items-center justify-center transition-all hover:scale-110 active:scale-95 z-50 group">
+<span class="material-symbols-outlined group-hover:rotate-180 transition-transform duration-500">filter_list</span>
+</button>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 w-full bg-surface/80 dark:bg-inverse-surface/90 backdrop-blur-2xl border-t border-outline-variant/20 shadow-[0_-10px_30px_rgba(0,0,0,0.04)] z-50 rounded-t-xl">
+<div class="max-w-7xl mx-auto flex justify-around items-center px-4 pt-3 pb-safe h-16">
+<button class="flex flex-col items-center justify-center text-on-secondary-container dark:text-secondary-fixed-dim hover:opacity-80 transition-opacity active:scale-90 duration-150">
+<span class="material-symbols-outlined">home</span>
+<span class="text-label-sm font-label-sm">Home</span>
+</button>
+<button class="flex flex-col items-center justify-center text-primary dark:text-primary-fixed-dim font-semibold hover:opacity-80 transition-opacity active:scale-90 duration-150">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">redeem</span>
+<span class="text-label-sm font-label-sm">Event</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-secondary-container dark:text-secondary-fixed-dim hover:opacity-80 transition-opacity active:scale-90 duration-150">
+<span class="material-symbols-outlined">search</span>
+<span class="text-label-sm font-label-sm">Search</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-secondary-container dark:text-secondary-fixed-dim hover:opacity-80 transition-opacity active:scale-90 duration-150">
+<span class="material-symbols-outlined">groups</span>
+<span class="text-label-sm font-label-sm">Community</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-secondary-container dark:text-secondary-fixed-dim hover:opacity-80 transition-opacity active:scale-90 duration-150">
+<span class="material-symbols-outlined">person</span>
+<span class="text-label-sm font-label-sm">My</span>
+</button>
+</div>
+</nav>
+<!-- Micro-interactions Script -->
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Ripple Effect for buttons
+            const buttons = document.querySelectorAll('button');
+            buttons.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    const rect = this.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    const ripple = document.createElement('span');
+                    ripple.className = 'absolute bg-white/30 rounded-full pointer-events-none transform -translate-x-1/2 -translate-y-1/2';
+                    ripple.style.left = x + 'px';
+                    ripple.style.top = y + 'px';
+                    ripple.style.width = '20px';
+                    ripple.style.height = '20px';
+                    ripple.style.animation = 'ripple 0.6s ease-out forwards';
+                    
+                    this.classList.add('relative', 'overflow-hidden');
+                    this.appendChild(ripple);
+                    
+                    setTimeout(() => ripple.remove(), 600);
+                });
+            });
+
+            // Sticky Header Scroll Effect
+            const header = document.querySelector('header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 20) {
+                    header.classList.add('py-2', 'shadow-md');
+                    header.classList.remove('py-stack-md', 'shadow-sm');
+                } else {
+                    header.classList.add('py-stack-md', 'shadow-sm');
+                    header.classList.remove('py-2', 'shadow-md');
+                }
+            });
+        });
+    </script>
+</body></html>

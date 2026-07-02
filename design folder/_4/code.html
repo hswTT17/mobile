@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+
+<html lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Hanken+Grotesk:wght@600;700;800&amp;family=Geist:wght@500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary-fixed": "#dce1ff",
+                    "primary": "#1550d3",
+                    "on-primary-fixed-variant": "#003cad",
+                    "on-tertiary-container": "#f7fff3",
+                    "surface-container": "#edeef1",
+                    "secondary-container": "#dde3ee",
+                    "on-surface-variant": "#434654",
+                    "on-surface": "#191c1e",
+                    "surface-container-low": "#f2f3f6",
+                    "primary-container": "#3c6bed",
+                    "background": "#f8f9fc",
+                    "secondary-fixed": "#dde3ee",
+                    "tertiary-fixed": "#6bff8f",
+                    "on-secondary-fixed-variant": "#414750",
+                    "on-secondary": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "outline": "#737686",
+                    "surface-variant": "#e1e2e5",
+                    "surface-container-highest": "#e1e2e5",
+                    "on-primary-fixed": "#00164d",
+                    "inverse-primary": "#b5c4ff",
+                    "inverse-surface": "#2e3133",
+                    "error-container": "#ffdad6",
+                    "on-tertiary-fixed": "#002109",
+                    "secondary": "#585f68",
+                    "on-tertiary-fixed-variant": "#005321",
+                    "inverse-on-surface": "#f0f1f4",
+                    "primary-fixed-dim": "#b5c4ff",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary": "#006b2d",
+                    "on-primary-container": "#fffbff",
+                    "on-primary": "#ffffff",
+                    "surface": "#f8f9fc",
+                    "outline-variant": "#c3c5d7",
+                    "on-background": "#191c1e",
+                    "surface-dim": "#d9dadd",
+                    "surface-container-high": "#e7e8eb",
+                    "on-secondary-fixed": "#161c24",
+                    "error": "#ba1a1a",
+                    "tertiary-container": "#00873b",
+                    "tertiary-fixed-dim": "#4ae176",
+                    "on-secondary-container": "#5e656e",
+                    "on-error-container": "#93000a",
+                    "on-error": "#ffffff",
+                    "surface-bright": "#f8f9fc",
+                    "surface-tint": "#1a53d6",
+                    "secondary-fixed-dim": "#c1c7d1"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "unit": "4px",
+                    "stack-md": "16px",
+                    "stack-lg": "32px",
+                    "stack-sm": "8px",
+                    "container-padding": "20px",
+                    "gutter": "16px",
+                    "section-gap": "48px"
+            },
+            "fontFamily": {
+                    "headline-lg": ["Hanken Grotesk"],
+                    "body-md": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "label-sm": ["Geist"],
+                    "headline-lg-mobile": ["Hanken Grotesk"],
+                    "label-md": ["Geist"],
+                    "headline-md": ["Hanken Grotesk"],
+                    "display-lg": ["Hanken Grotesk"]
+            },
+            "fontSize": {
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.03em", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["26px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #f8f9fc;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .glass-effect {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .custom-shadow {
+            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.04);
+        }
+        input:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(21, 80, 211, 0.1);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body-md text-on-surface">
+<!-- Top Navigation Bar -->
+<header class="bg-surface/80 dark:bg-surface-dim/80 backdrop-blur-xl fixed top-0 w-full z-50 border-b border-outline-variant/30 dark:border-outline/20 shadow-sm dark:shadow-none">
+<div class="flex justify-between items-center px-container-padding py-stack-md w-full max-w-7xl mx-auto">
+<div class="flex items-center gap-4">
+<button class="p-2 hover:bg-surface-container-low transition-colors rounded-full text-primary">
+<span class="material-symbols-outlined">grid_view</span>
+</button>
+<h1 class="text-headline-md font-headline-md font-bold text-primary">앱테크 허브</h1>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 hover:bg-surface-container-low transition-colors rounded-full text-primary">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</div>
+</div>
+</header>
+<main class="pt-24 pb-32 max-w-7xl mx-auto px-container-padding">
+<!-- Search Input Section -->
+<section class="mb-stack-lg">
+<div class="relative group">
+<div class="absolute inset-y-0 left-4 flex items-center pointer-events-none text-outline">
+<span class="material-symbols-outlined">search</span>
+</div>
+<input class="w-full bg-surface-container-lowest border-outline-variant/50 rounded-xl py-4 pl-12 pr-4 text-body-lg font-body-lg focus:border-primary transition-all custom-shadow border-1" placeholder="앱 이름이나 혜택을 검색하세요" type="text"/>
+</div>
+</section>
+<!-- Popular Keywords (인기 검색어) -->
+<section class="mb-section-gap">
+<div class="flex items-center justify-between mb-stack-md">
+<h2 class="text-headline-md font-headline-md text-on-surface">인기 검색어</h2>
+<span class="text-label-md font-label-md text-primary">14:00 기준</span>
+</div>
+<div class="flex flex-wrap gap-stack-sm">
+<div class="flex items-center gap-2 bg-surface-container-lowest border border-outline-variant/30 px-4 py-2.5 rounded-full custom-shadow hover:bg-primary-fixed transition-colors cursor-pointer group">
+<span class="text-primary font-bold text-label-md">1.</span>
+<span class="text-on-surface font-medium text-label-md">캐시워크</span>
+<span class="material-symbols-outlined text-sm text-error" style="font-variation-settings: 'FILL' 1;">trending_up</span>
+</div>
+<div class="flex items-center gap-2 bg-surface-container-lowest border border-outline-variant/30 px-4 py-2.5 rounded-full custom-shadow hover:bg-primary-fixed transition-colors cursor-pointer">
+<span class="text-primary font-bold text-label-md">2.</span>
+<span class="text-on-surface font-medium text-label-md">설문조사</span>
+</div>
+<div class="flex items-center gap-2 bg-surface-container-lowest border border-outline-variant/30 px-4 py-2.5 rounded-full custom-shadow hover:bg-primary-fixed transition-colors cursor-pointer">
+<span class="text-primary font-bold text-label-md">3.</span>
+<span class="text-on-surface font-medium text-label-md">짠테크</span>
+</div>
+<div class="flex items-center gap-2 bg-surface-container-lowest border border-outline-variant/30 px-4 py-2.5 rounded-full custom-shadow hover:bg-primary-fixed transition-colors cursor-pointer">
+<span class="text-primary font-bold text-label-md">4.</span>
+<span class="text-on-surface font-medium text-label-md">토스 만보기</span>
+</div>
+</div>
+</section>
+<!-- Categories (카테고리) -->
+<section class="mb-section-gap">
+<h2 class="text-headline-md font-headline-md text-on-surface mb-stack-md">카테고리</h2>
+<div class="grid grid-cols-5 gap-4">
+<div class="flex flex-col items-center gap-2 group cursor-pointer">
+<div class="w-14 h-14 rounded-2xl bg-primary-fixed flex items-center justify-center text-primary group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-3xl">emoji_events</span>
+</div>
+<span class="text-label-md font-label-md text-on-surface-variant">챌린지</span>
+</div>
+<div class="flex flex-col items-center gap-2 group cursor-pointer">
+<div class="w-14 h-14 rounded-2xl bg-secondary-fixed flex items-center justify-center text-secondary group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-3xl">shopping_bag</span>
+</div>
+<span class="text-label-md font-label-md text-on-surface-variant">쇼핑</span>
+</div>
+<div class="flex flex-col items-center gap-2 group cursor-pointer">
+<div class="w-14 h-14 rounded-2xl bg-tertiary-fixed-dim flex items-center justify-center text-tertiary group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-3xl">fact_check</span>
+</div>
+<span class="text-label-md font-label-md text-on-surface-variant">설문</span>
+</div>
+<div class="flex flex-col items-center gap-2 group cursor-pointer">
+<div class="w-14 h-14 rounded-2xl bg-primary-container flex items-center justify-center text-on-primary-container group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-3xl">account_balance_wallet</span>
+</div>
+<span class="text-label-md font-label-md text-on-surface-variant">금융</span>
+</div>
+<div class="flex flex-col items-center gap-2 group cursor-pointer">
+<div class="w-14 h-14 rounded-2xl bg-surface-container-highest flex items-center justify-center text-on-surface group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-3xl">quiz</span>
+</div>
+<span class="text-label-md font-label-md text-on-surface-variant">퀴즈</span>
+</div>
+</div>
+</section>
+<!-- Recommended Apps (추천 앱테크) -->
+<section>
+<div class="flex items-center justify-between mb-stack-md">
+<h2 class="text-headline-md font-headline-md text-on-surface">추천 앱테크</h2>
+<button class="text-label-md font-label-md text-secondary flex items-center gap-1">전체보기 <span class="material-symbols-outlined text-sm">chevron_right</span></button>
+</div>
+<div class="space-y-4">
+<!-- App Card 1 -->
+<div class="bg-surface-container-lowest p-5 rounded-2xl border border-outline-variant/30 custom-shadow flex items-center gap-4 hover:border-primary/30 transition-colors cursor-pointer">
+<div class="w-16 h-16 rounded-xl overflow-hidden shrink-0 border border-outline-variant/20">
+<img class="w-full h-full object-cover" data-alt="A clean, vibrant digital app icon for a walking reward app, featuring a stylized sneaker with glowing neon blue trails. The background is a crisp minimalist white with soft cyan accents, embodying a premium and fluid technology aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRcU1wk3SApzDCZOk_JrsCxh3gdgbpcU1_cPcfjjjLsOAFM0Hz5LpiVDe6aW5Ruo64r__jLNClhzFWLp0dwMlaK-z7Hq9AuGK1bu-AUb7jph1l_hJCxKF17W4JNcjBhIa5fcVcWaPnNcimwBO3Jo33ifEi4qLxokM9PZXGPSSFQY_6Tkd8GGf1VA9NMPuNBCoozU1RGuy13n3LrYlLQHoNPHbFi9UmF7pIWrmDUQEWtjz8lJQ_ivx8JQ"/>
+</div>
+<div class="flex-1">
+<div class="flex items-center gap-2 mb-1">
+<h3 class="text-body-lg font-bold text-on-surface">워킹 히어로</h3>
+<span class="px-2 py-0.5 bg-tertiary-fixed text-on-tertiary-fixed text-[10px] font-bold rounded-full">추천</span>
+</div>
+<p class="text-label-md text-on-surface-variant line-clamp-1">하루 1만보 걷고 100캐시 적립하세요</p>
+<div class="flex items-center gap-3 mt-2">
+<span class="text-label-sm font-label-sm text-primary flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">star</span> 4.8
+                            </span>
+<span class="text-label-sm font-label-sm text-on-surface-variant">리뷰 12.4k</span>
+</div>
+</div>
+<button class="px-4 py-2 bg-primary text-on-primary rounded-full text-label-md font-bold active:scale-95 transition-transform">받기</button>
+</div>
+<!-- App Card 2 -->
+<div class="bg-surface-container-lowest p-5 rounded-2xl border border-outline-variant/30 custom-shadow flex items-center gap-4 hover:border-primary/30 transition-colors cursor-pointer">
+<div class="w-16 h-16 rounded-xl overflow-hidden shrink-0 border border-outline-variant/20">
+<img class="w-full h-full object-cover" data-alt="A modern survey application icon displaying a stylized checkmark and documents, rendered in a sophisticated palette of deep navy and bright emerald green. The design is sleek, reflecting high-end financial software with glassmorphism elements and soft ambient shadows." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBtZnLOerRQBrqkTP8j09u_vbCgQXHzVddDmxYzxaF-z5mb2WMyXDeG78YzOHK8ScKx2z-OMDCLvGB6OcZ2i3l0a2wUSF45PX63adi93tFNKyZQSZ_EYurZPL9d3SxSIBKZOJvKred49f7q6pqJV8-V7dxEH5gMrb1cCXN1XX1aqJRSkw-Mv7xRPX17J2c-3fVnzpkfOsOYgAtMEfP3gPeYc-EG-8fgmFXjx0uaK6GZ0PaEeR_jIAiBSg"/>
+</div>
+<div class="flex-1">
+<div class="flex items-center gap-2 mb-1">
+<h3 class="text-body-lg font-bold text-on-surface">서베이 마스터</h3>
+</div>
+<p class="text-label-md text-on-surface-variant line-clamp-1">3분 설문 참여하고 커피 기프티콘 받기</p>
+<div class="flex items-center gap-3 mt-2">
+<span class="text-label-sm font-label-sm text-primary flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">star</span> 4.5
+                            </span>
+<span class="text-label-sm font-label-sm text-on-surface-variant">리뷰 8.1k</span>
+</div>
+</div>
+<button class="px-4 py-2 bg-surface-container text-primary rounded-full text-label-md font-bold active:scale-95 transition-transform">열기</button>
+</div>
+<!-- App Card 3 -->
+<div class="bg-surface-container-lowest p-5 rounded-2xl border border-outline-variant/30 custom-shadow flex items-center gap-4 hover:border-primary/30 transition-colors cursor-pointer">
+<div class="w-16 h-16 rounded-xl overflow-hidden shrink-0 border border-outline-variant/20">
+<img class="w-full h-full object-cover" data-alt="A premium financial quiz app icon featuring a golden lightbulb inside a sleek digital frame. The visual style is rooted in minimalism with a tech-focused, digital prosperity vibe, using gradients of primary blue and light grey." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDnHoaO2uOHmDhKr1VYboxVNqe0-ka-wRLnmVj_T-JDoTAhhzjU22LRKJ1jT2LBXk5wvQf7qJpJVd56_nE9YZB8xT_ThqSlbLYH0epjgFoQUukg9A3bsMIyU75Pnu18dmeXtM39-V8BTJVcqisqju9ipaBZlJk07fzHRgPM_gbhJ2WYaZ8X7xSaJ9lkX_1BDdJexSUbm6zv8226j8uiiEfajy-5lmeSJdjcevIW7_1j9Lc1usknFxNWQw"/>
+</div>
+<div class="flex-1">
+<div class="flex items-center gap-2 mb-1">
+<h3 class="text-body-lg font-bold text-on-surface">상식 퀴즈톡</h3>
+<span class="px-2 py-0.5 bg-primary-fixed text-primary text-[10px] font-bold rounded-full">신규</span>
+</div>
+<p class="text-label-md text-on-surface-variant line-clamp-1">매일 정오에 열리는 퀴즈 맞추고 포인트 획득</p>
+<div class="flex items-center gap-3 mt-2">
+<span class="text-label-sm font-label-sm text-primary flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">star</span> 4.9
+                            </span>
+<span class="text-label-sm font-label-sm text-on-surface-variant">리뷰 2.3k</span>
+</div>
+</div>
+<button class="px-4 py-2 bg-primary text-on-primary rounded-full text-label-md font-bold active:scale-95 transition-transform">받기</button>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="bg-surface/80 dark:bg-inverse-surface/90 backdrop-blur-2xl fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pt-3 pb-safe z-50 rounded-t-xl border-t border-outline-variant/20 dark:border-outline/10 shadow-[0_-10px_30px_rgba(0,0,0,0.04)]">
+<a class="flex flex-col items-center justify-center text-on-secondary-container dark:text-secondary-fixed-dim hover:opacity-80 transition-opacity" href="#">
+<span class="material-symbols-outlined mb-1">home</span>
+<span class="text-label-sm font-label-sm">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-secondary-container dark:text-secondary-fixed-dim hover:opacity-80 transition-opacity" href="#">
+<span class="material-symbols-outlined mb-1">redeem</span>
+<span class="text-label-sm font-label-sm">Event</span>
+</a>
+<!-- Active Tab: Search -->
+<a class="flex flex-col items-center justify-center text-primary dark:text-primary-fixed-dim font-semibold scale-90 transition-all duration-150" href="#">
+<div class="bg-primary/10 rounded-full px-4 py-1 flex flex-col items-center">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">search</span>
+<span class="text-label-sm font-label-sm">Search</span>
+</div>
+</a>
+<a class="flex flex-col items-center justify-center text-on-secondary-container dark:text-secondary-fixed-dim hover:opacity-80 transition-opacity" href="#">
+<span class="material-symbols-outlined mb-1">groups</span>
+<span class="text-label-sm font-label-sm">Community</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-secondary-container dark:text-secondary-fixed-dim hover:opacity-80 transition-opacity" href="#">
+<span class="material-symbols-outlined mb-1">person</span>
+<span class="text-label-sm font-label-sm">My</span>
+</a>
+</nav>
+<script>
+        // Simple micro-interaction for cards
+        document.querySelectorAll('.cursor-pointer').forEach(card => {
+            card.addEventListener('mousedown', () => {
+                card.style.transform = 'scale(0.98)';
+                card.style.transition = 'transform 0.1s ease';
+            });
+            card.addEventListener('mouseup', () => {
+                card.style.transform = 'scale(1)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body></html>
