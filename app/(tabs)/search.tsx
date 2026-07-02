@@ -11,6 +11,7 @@ import {
   View,
 } from 'react-native';
 import { TopBar } from '@/components/TopBar';
+import { DifficultyBadge } from '@/components/DifficultyBadge';
 import { useSelectionTotals } from '@/hooks/useSelectionTotals';
 import { formatWon } from '@/lib/format';
 import { useAppSelectionStore } from '@/store/useAppSelectionStore';
@@ -124,6 +125,9 @@ export default function SearchScreen() {
                         일일 최대 {formatWon(app.daily_max_reward)} · 월 최대{' '}
                         {formatWon(app.monthly_max_reward)}
                       </Text>
+                      <View style={styles.appBadgeRow}>
+                        <DifficultyBadge earnSteps={app.earn_steps} />
+                      </View>
                     </View>
                   </Pressable>
                   <Pressable
@@ -208,6 +212,7 @@ const styles = StyleSheet.create({
   appName: { ...typography.bodyLg, fontWeight: '700', color: colors.onSurface },
   appSummary: { ...typography.labelMd, color: colors.onSurfaceVariant },
   appReward: { ...typography.labelSm, color: colors.primary, fontWeight: '700', marginTop: 2 },
+  appBadgeRow: { flexDirection: 'row', marginTop: 6 },
   checkbox: {
     width: 26,
     height: 26,

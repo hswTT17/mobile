@@ -40,3 +40,8 @@ yarn-error.*
 # generated native folders
 /ios
 /android
+
+.supabase-db-password.txt
+
+# Supabase CLI local link metadata
+supabase/.temp/

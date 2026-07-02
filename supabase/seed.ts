@@ -17,6 +17,7 @@ if (!supabaseUrl || !serviceRoleKey) {
       'Set them in your environment or a .env file before running `npm run seed`.'
   );
   process.exit(1);
+  throw new Error('unreachable');
 }
 
 const supabase = createClient(supabaseUrl, serviceRoleKey, {
@@ -38,6 +39,7 @@ const apps = [
     description: '매일 걷는 만큼 포인트가 쌓이는 국내 대표 만보기 앱테크 앱입니다.',
     pros: ['배터리 소모 걱정 없이 백그라운드에서 동작', '적립 포인트를 커피/편의점 상품으로 즉시 교환'],
     cons: ['일일 최대 만보까지만 적립', '포인트 교환 시 광고가 노출될 수 있음'],
+    earn_steps: ['앱 설치 후 회원가입', '만보기(동작 인식) 권한 허용', '하루 목표 걸음 수 채우기'],
     play_store_url: 'https://play.google.com/store/apps/details?id=kr.co.psynet',
     app_store_url: 'https://apps.apple.com/kr/app/cashwalk/id1069676874',
     rating: 4.6,
@@ -53,6 +55,12 @@ const apps = [
     description: '걸음 수 기반 적립과 매일 럭키드로우 응모권을 함께 제공하는 앱입니다.',
     pros: ['매일 럭키드로우 응모 기회 제공', '친구 초대 보너스'],
     cons: ['걸음 수 동기화가 느릴 수 있음'],
+    earn_steps: [
+      '앱 설치 후 회원가입',
+      '하루 목표 걸음 수 채우기',
+      '럭키드로우 응모하기',
+      '당첨 확인 후 캐시 수령',
+    ],
     play_store_url: 'https://play.google.com/store/apps',
     app_store_url: 'https://apps.apple.com/app',
     rating: 4.3,
@@ -68,6 +76,7 @@ const apps = [
     description: '작지만 꾸준히 쌓이는 소액 적립형 걷기 리워드 앱입니다.',
     pros: ['가벼운 앱 용량', '간단한 UI'],
     cons: ['적립 단가가 낮음', '출금까지 시간이 오래 걸릴 수 있음'],
+    earn_steps: ['앱 설치 후 회원가입', '걷기만 하면 자동으로 적립'],
     play_store_url: 'https://play.google.com/store/apps',
     app_store_url: null,
     rating: 4.0,
@@ -83,6 +92,13 @@ const apps = [
     description: '걷기 리워드에 미니게임 요소를 더해 재미있게 적립할 수 있는 앱입니다.',
     pros: ['미니게임으로 추가 적립 가능', '주간 랭킹 이벤트'],
     cons: ['광고 시청이 잦은 편'],
+    earn_steps: [
+      '앱 설치 후 회원가입',
+      '하루 목표 걸음 수 채우기',
+      '미니게임 플레이',
+      '보상형 광고 시청',
+      '캐시 수령',
+    ],
     play_store_url: 'https://play.google.com/store/apps',
     app_store_url: 'https://apps.apple.com/app',
     rating: 4.1,
@@ -98,6 +114,7 @@ const apps = [
     description: '짧은 광고를 시청하고 캐시를 받는 광고형 리워드 앱입니다.',
     pros: ['적립 단가가 높은 편', '즉시 출금 가능한 낮은 최소 금액'],
     cons: ['광고 시청 시간이 누적되면 지칠 수 있음'],
+    earn_steps: ['앱 설치 후 회원가입', '보상형 광고 시청', '캐시 적립 확인'],
     play_store_url: 'https://play.google.com/store/apps',
     app_store_url: 'https://apps.apple.com/app',
     rating: 4.4,
@@ -113,6 +130,12 @@ const apps = [
     description: '저금통에 캐시를 모으는 컨셉의 광고 시청형 앱테크 앱입니다.',
     pros: ['저금통 애니메이션으로 성취감 제공', '주기적인 2배 적립 이벤트'],
     cons: ['광고 로딩 시간이 길 때가 있음'],
+    earn_steps: [
+      '앱 설치 후 회원가입',
+      '저금통 광고 시청',
+      '2배 적립 이벤트 참여',
+      '캐시 수령',
+    ],
     play_store_url: 'https://play.google.com/store/apps',
     app_store_url: null,
     rating: 4.2,
@@ -128,6 +151,13 @@ const apps = [
     description: '퍼즐을 풀면서 광고 리워드를 받는 캐주얼 게임형 앱테크입니다.',
     pros: ['게임 요소로 지루하지 않음', '친구와 함께하는 랭킹전'],
     cons: ['적립 한도가 낮은 편'],
+    earn_steps: [
+      '앱 설치 후 회원가입',
+      '오늘의 퍼즐 클리어',
+      '보상형 광고 시청',
+      '주간 랭킹 확인',
+      '보상 수령',
+    ],
     play_store_url: 'https://play.google.com/store/apps',
     app_store_url: 'https://apps.apple.com/app',
     rating: 4.0,
@@ -143,6 +173,7 @@ const apps = [
     description: '심플한 UI로 걷기 리워드만 집중적으로 제공하는 앱입니다.',
     pros: ['가입 절차가 간단함', '위젯으로 걸음 수 확인 가능'],
     cons: ['이벤트가 자주 없는 편'],
+    earn_steps: ['앱 설치 후 회원가입', '걷기만 하면 자동으로 적립'],
     play_store_url: 'https://play.google.com/store/apps',
     app_store_url: null,
     rating: 3.9,
@@ -158,6 +189,13 @@ const apps = [
     description: '짧은 설문에 참여하고 포인트를 받는 설문조사형 앱테크 앱입니다.',
     pros: ['설문 하나당 보상이 명확함', '다양한 주제의 설문 제공'],
     cons: ['설문 자격 조건에 따라 참여가 제한될 수 있음'],
+    earn_steps: [
+      '앱 설치 후 회원가입',
+      '참여 가능한 설문 자격 확인',
+      '설문 참여 및 제출',
+      '검수 승인 대기',
+      '포인트 지급 확인',
+    ],
     play_store_url: 'https://play.google.com/store/apps',
     app_store_url: 'https://apps.apple.com/app',
     rating: 4.3,
@@ -173,6 +211,12 @@ const apps = [
     description: '가상 반려동물을 키우며 걷기 리워드를 받는 앱테크 앱입니다.',
     pros: ['귀여운 캐릭터 육성 요소', '매일 출석 보너스'],
     cons: ['캐릭터 육성에 시간이 필요함'],
+    earn_steps: [
+      '앱 설치 후 회원가입',
+      '매일 출석체크',
+      '반려동물 먹이주기',
+      '목표 걸음 수 채우기',
+    ],
     play_store_url: 'https://play.google.com/store/apps',
     app_store_url: null,
     rating: 4.1,

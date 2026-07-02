@@ -11,6 +11,7 @@ export interface AppTechApp {
   description: string;
   pros: string[];
   cons: string[];
+  earn_steps: string[];
   play_store_url: string | null;
   app_store_url: string | null;
   rating: number;

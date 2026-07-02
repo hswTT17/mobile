@@ -13,6 +13,7 @@ import {
 } from 'react-native';
 import { TopBar } from '@/components/TopBar';
 import { PrimaryButton } from '@/components/PrimaryButton';
+import { DifficultyBadge } from '@/components/DifficultyBadge';
 import { formatWon } from '@/lib/format';
 import { useAppsStore } from '@/store/useAppsStore';
 import { colors, radius, spacing, typography } from '@/theme/tokens';
@@ -62,6 +63,9 @@ export default function AppDetailScreen() {
               <Text style={styles.dot}>•</Text>
               <Text style={styles.downloadText}>{app.download_count_label}</Text>
             </View>
+            <View style={styles.badgeRow}>
+              <DifficultyBadge earnSteps={app.earn_steps} />
+            </View>
           </View>
         </View>
 
@@ -81,6 +85,25 @@ export default function AppDetailScreen() {
             <Text style={[styles.statValue, { color: colors.tertiary }]}>{app.reward_method}</Text>
           </View>
         </View>
+
+        {app.earn_steps.length > 0 && (
+          <View style={styles.section}>
+            <View style={styles.stepsHeaderRow}>
+              <Text style={styles.sectionTitle}>혜택 받는 방법</Text>
+              <Text style={styles.stepsCount}>총 {app.earn_steps.length}단계</Text>
+            </View>
+            <View style={{ gap: spacing.stackMd }}>
+              {app.earn_steps.map((step, idx) => (
+                <View key={idx} style={styles.stepRow}>
+                  <View style={styles.stepNumberWrap}>
+                    <Text style={styles.stepNumber}>{idx + 1}</Text>
+                  </View>
+                  <Text style={styles.stepText}>{step}</Text>
+                </View>
+              ))}
+            </View>
+          </View>
+        )}
 
         {app.pros.length > 0 && (
           <View style={styles.section}>
@@ -152,6 +175,20 @@ const styles = StyleSheet.create({
   ratingText: { ...typography.labelMd, color: colors.onSurfaceVariant },
   dot: { color: colors.outlineVariant },
   downloadText: { ...typography.labelMd, color: colors.onSurfaceVariant },
+  badgeRow: { flexDirection: 'row', marginTop: 8 },
+  stepsHeaderRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
+  stepsCount: { ...typography.labelMd, color: colors.onSurfaceVariant },
+  stepRow: { flexDirection: 'row', gap: spacing.stackMd, alignItems: 'flex-start' },
+  stepNumberWrap: {
+    width: 28,
+    height: 28,
+    borderRadius: radius.full,
+    backgroundColor: colors.primary,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  stepNumber: { ...typography.labelMd, color: colors.onPrimary, fontWeight: '700' },
+  stepText: { flex: 1, ...typography.bodyMd, color: colors.onSurface, paddingTop: 3 },
   statsBar: {
     flexDirection: 'row',
     backgroundColor: colors.surfaceContainerLowest,

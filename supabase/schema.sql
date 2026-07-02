@@ -15,6 +15,10 @@ create table if not exists public.apps (
   description text not null default '',
   pros text[] not null default '{}',
   cons text[] not null default '{}',
+  -- Ordered steps a user follows to actually earn the reward. Difficulty is
+  -- not stored separately — it's derived from step count (see src/lib/difficulty.ts)
+  -- so the two can never drift out of sync.
+  earn_steps text[] not null default '{}',
   play_store_url text,
   app_store_url text,
   rating numeric(2, 1) not null default 4.5,

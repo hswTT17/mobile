@@ -10,6 +10,7 @@ import {
   View,
 } from 'react-native';
 import { Card } from '@/components/Card';
+import { DifficultyBadge } from '@/components/DifficultyBadge';
 import { ProgressBar } from '@/components/ProgressBar';
 import { TopBar } from '@/components/TopBar';
 import { mockEvents } from '@/data/mockEvents';
@@ -122,6 +123,9 @@ export default function HomeScreen() {
                       일일 최대 {formatWon(app.daily_max_reward)} / 월 최대{' '}
                       {formatWon(app.monthly_max_reward)}
                     </Text>
+                    <View style={styles.appRowBadgeRow}>
+                      <DifficultyBadge earnSteps={app.earn_steps} />
+                    </View>
                   </View>
                   <MaterialIcons name="chevron-right" size={22} color={colors.outlineVariant} />
                 </Pressable>
@@ -252,6 +256,7 @@ const styles = StyleSheet.create({
   appRowInfo: { flex: 1, gap: 2 },
   appRowName: { ...typography.bodyMd, fontWeight: '700', color: colors.onSurface },
   appRowMeta: { ...typography.labelMd, color: colors.onSurfaceVariant },
+  appRowBadgeRow: { flexDirection: 'row', marginTop: 6 },
   eventScrollRow: { flexDirection: 'row', gap: spacing.gutter, paddingHorizontal: spacing.containerPadding },
   eventPromoCard: { width: 260, height: 160, borderRadius: radius.xl, padding: 20, justifyContent: 'flex-end', gap: 4 },
   eventPromoTag: {
