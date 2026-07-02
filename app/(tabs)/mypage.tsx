@@ -33,7 +33,7 @@ export default function MyPageScreen() {
 
   return (
     <View style={styles.flex}>
-      <TopBar title="앱테크 허브" leftIcon="grid-view" rightIcon="notifications" />
+      <TopBar title="앱테크 허브" leftIcon="grid-view" onLeftPress={() => router.push('/(tabs)/search')} />
       <ScrollView contentContainerStyle={styles.content}>
         {/* Profile Header */}
         <View style={styles.profileRow}>

@@ -34,4 +34,7 @@ export interface EventItem {
   reward_label: string;
   time_left_label: string;
   urgent: boolean;
+  // Matches an app's `name` in the catalog, if this event is tied to one —
+  // used to route the event's CTA button somewhere real.
+  related_app_name: string | null;
 }

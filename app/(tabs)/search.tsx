@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { MaterialIcons } from '@expo/vector-icons';
-import { router } from 'expo-router';
+import { router, useLocalSearchParams } from 'expo-router';
 import {
   Image,
   Pressable,
@@ -26,9 +26,12 @@ const CATEGORIES: { label: string; value: RewardMethod | 'all' }[] = [
   { label: '광고 시청', value: '광고 시청' },
   { label: '설문', value: '설문' },
   { label: '쇼핑', value: '쇼핑' },
+  { label: '출석체크', value: '출석체크' },
+  { label: '퀴즈', value: '퀴즈' },
 ];
 
 export default function SearchScreen() {
+  const { category: categoryParam } = useLocalSearchParams<{ category?: string }>();
   const user = useAuthStore((s) => s.user);
   const apps = useAppsStore((s) => s.apps);
   const fetchApps = useAppsStore((s) => s.fetchApps);
@@ -39,7 +42,8 @@ export default function SearchScreen() {
   const { dailyTotal, monthlyTotal } = useSelectionTotals();
 
   const [query, setQuery] = useState('');
-  const [category, setCategory] = useState<RewardMethod | 'all'>('all');
+  const initialCategory = CATEGORIES.find((c) => c.value === categoryParam)?.value ?? 'all';
+  const [category, setCategory] = useState<RewardMethod | 'all'>(initialCategory);
 
   useEffect(() => {
     fetchApps();
@@ -64,7 +68,7 @@ export default function SearchScreen() {
 
   return (
     <View style={styles.flex}>
-      <TopBar title="앱테크 허브" leftIcon="grid-view" rightIcon="notifications" />
+      <TopBar title="앱테크 허브" leftIcon="grid-view" onLeftPress={() => router.push('/(tabs)')} />
       <ScrollView contentContainerStyle={styles.content} keyboardShouldPersistTaps="handled">
         <View style={styles.searchBox}>
           <MaterialIcons name="search" size={22} color={colors.outline} />

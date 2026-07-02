@@ -1,4 +1,5 @@
 import { MaterialIcons } from '@expo/vector-icons';
+import { router } from 'expo-router';
 import { StyleSheet, Text, View } from 'react-native';
 import { Card } from '@/components/Card';
 import { TopBar } from '@/components/TopBar';
@@ -9,7 +10,7 @@ import { colors, radius, spacing, typography } from '@/theme/tokens';
 export default function CommunityScreen() {
   return (
     <View style={styles.flex}>
-      <TopBar title="앱테크 허브" leftIcon="grid-view" rightIcon="notifications" />
+      <TopBar title="앱테크 허브" leftIcon="grid-view" onLeftPress={() => router.push('/(tabs)/search')} />
       <View style={styles.content}>
         <Card style={styles.card}>
           <View style={styles.iconWrap}>

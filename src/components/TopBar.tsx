@@ -10,9 +10,10 @@ interface TopBarProps {
   rightIcon?: keyof typeof MaterialIcons.glyphMap;
   onRightPress?: () => void;
   leftIcon?: keyof typeof MaterialIcons.glyphMap;
+  onLeftPress?: () => void;
 }
 
-export function TopBar({ title, onBack, rightIcon, onRightPress, leftIcon }: TopBarProps) {
+export function TopBar({ title, onBack, rightIcon, onRightPress, leftIcon, onLeftPress }: TopBarProps) {
   const insets = useSafeAreaInsets();
   return (
     <BlurView intensity={40} tint="light" style={[styles.wrap, { paddingTop: insets.top }]}>
@@ -23,7 +24,9 @@ export function TopBar({ title, onBack, rightIcon, onRightPress, leftIcon }: Top
               <MaterialIcons name="chevron-left" size={28} color={colors.primary} />
             </Pressable>
           ) : leftIcon ? (
-            <MaterialIcons name={leftIcon} size={24} color={colors.primary} />
+            <Pressable onPress={onLeftPress} hitSlop={8} disabled={!onLeftPress}>
+              <MaterialIcons name={leftIcon} size={24} color={colors.primary} />
+            </Pressable>
           ) : null}
         </View>
         <Text style={styles.title} numberOfLines={1}>

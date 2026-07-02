@@ -1,15 +1,23 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { MaterialIcons } from '@expo/vector-icons';
+import { router } from 'expo-router';
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { Chip } from '@/components/Chip';
 import { TopBar } from '@/components/TopBar';
 import { mockEvents } from '@/data/mockEvents';
+import { useAppsStore } from '@/store/useAppsStore';
 import { colors, radius, spacing, typography } from '@/theme/tokens';
 
 const FILTERS = ['전체', '오늘 종료', '신규', '고수익'] as const;
 
 export default function EventsScreen() {
   const [filter, setFilter] = useState<(typeof FILTERS)[number]>('전체');
+  const apps = useAppsStore((s) => s.apps);
+  const fetchApps = useAppsStore((s) => s.fetchApps);
+
+  useEffect(() => {
+    fetchApps();
+  }, [fetchApps]);
 
   const events = mockEvents.filter((event) => {
     if (filter === '전체') return true;
@@ -19,14 +27,23 @@ export default function EventsScreen() {
     return true;
   });
 
+  const goToEvent = (relatedAppName: string | null) => {
+    const relatedApp = relatedAppName ? apps.find((app) => app.name === relatedAppName) : undefined;
+    if (relatedApp) {
+      router.push(`/app-detail/${relatedApp.id}`);
+    } else {
+      router.push('/(tabs)/search');
+    }
+  };
+
   return (
     <View style={styles.flex}>
-      <TopBar title="앱테크 허브" leftIcon="grid-view" rightIcon="notifications" />
+      <TopBar title="앱테크 허브" leftIcon="grid-view" onLeftPress={() => router.push('/(tabs)/search')} />
       <ScrollView contentContainerStyle={styles.content}>
         <View style={styles.hero}>
           <Chip label="Hot Benefit" tone="primary" />
           <Text style={styles.heroTitle}>놓치면 아쉬운{'\n'}오늘의 황금 리워드</Text>
-          <Text style={styles.heroSub}>현재 {mockEvents.length * 24}개의 새로운 이벤트가 시작되었습니다.</Text>
+          <Text style={styles.heroSub}>현재 {mockEvents.length}개의 이벤트가 진행 중입니다.</Text>
           <MaterialIcons
             name="redeem"
             size={120}
@@ -55,45 +72,52 @@ export default function EventsScreen() {
         </ScrollView>
 
         <View style={styles.grid}>
-          {events.map((event) => (
-            <View key={event.id} style={styles.eventCard}>
-              <View style={styles.eventCardHeader}>
-                <View style={styles.eventIconWrap}>
-                  <MaterialIcons name="card-giftcard" size={26} color={colors.primary} />
+          {events.map((event) => {
+            const hasRelatedApp = Boolean(
+              event.related_app_name && apps.some((app) => app.name === event.related_app_name)
+            );
+            return (
+              <View key={event.id} style={styles.eventCard}>
+                <View style={styles.eventCardHeader}>
+                  <View style={styles.eventIconWrap}>
+                    <MaterialIcons name="card-giftcard" size={26} color={colors.primary} />
+                  </View>
+                  <View style={[styles.timeBadge, event.urgent && styles.timeBadgeUrgent]}>
+                    <Text style={[styles.timeBadgeLabel, event.urgent && styles.timeBadgeLabelUrgent]}>
+                      {event.time_left_label}
+                    </Text>
+                  </View>
                 </View>
-                <View style={[styles.timeBadge, event.urgent && styles.timeBadgeUrgent]}>
-                  <MaterialIcons
-                    name="timer"
-                    size={14}
-                    color={event.urgent ? colors.onErrorContainer : colors.onSurfaceVariant}
-                  />
-                  <Text style={[styles.timeBadgeLabel, event.urgent && styles.timeBadgeLabelUrgent]}>
-                    {event.time_left_label}
-                  </Text>
+                <View style={styles.eventCardBody}>
+                  <View style={styles.eventTagRow}>
+                    <Chip label={event.category} />
+                    <Text style={styles.eventBrand}>{event.brand}</Text>
+                  </View>
+                  <Text style={styles.eventTitle}>{event.title}</Text>
+                  <Text style={styles.eventReward}>{event.reward_label}</Text>
                 </View>
-              </View>
-              <View style={styles.eventCardBody}>
-                <View style={styles.eventTagRow}>
-                  <Chip label={event.category} />
-                  <Text style={styles.eventBrand}>{event.brand}</Text>
-                </View>
-                <Text style={styles.eventTitle}>{event.title}</Text>
-                <Text style={styles.eventReward}>{event.reward_label}</Text>
-              </View>
-              <View style={[styles.eventButton, event.urgent && styles.eventButtonOutline]}>
-                <Text
-                  style={[styles.eventButtonLabel, event.urgent && styles.eventButtonLabelOutline]}
+                <Pressable
+                  style={({ pressed }) => [
+                    styles.eventButton,
+                    event.urgent && styles.eventButtonOutline,
+                    pressed && styles.pressed,
+                  ]}
+                  onPress={() => goToEvent(event.related_app_name)}
                 >
-                  {event.urgent ? '지금 바로 참여' : '참여하고 혜택 받기'}
-                </Text>
-                <MaterialIcons
-                  name="arrow-forward"
-                  size={16}
-                  color={event.urgent ? colors.primary : colors.onPrimary}
-                />
+                  <Text
+                    style={[styles.eventButtonLabel, event.urgent && styles.eventButtonLabelOutline]}
+                  >
+                    {hasRelatedApp ? '앱 상세 보러가기' : '앱테크 앱 둘러보기'}
+                  </Text>
+                  <MaterialIcons
+                    name="arrow-forward"
+                    size={16}
+                    color={event.urgent ? colors.primary : colors.onPrimary}
+                  />
+                </Pressable>
               </View>
-            </View>
-          ))}
+            );
+          })}
         </View>
       </ScrollView>
     </View>
@@ -177,4 +201,5 @@ const styles = StyleSheet.create({
   eventButtonOutline: { backgroundColor: 'transparent', borderWidth: 2, borderColor: colors.primary },
   eventButtonLabel: { ...typography.labelMd, color: colors.onPrimary, fontWeight: '700' },
   eventButtonLabelOutline: { color: colors.primary },
+  pressed: { transform: [{ scale: 0.98 }] },
 });

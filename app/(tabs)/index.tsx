@@ -10,6 +10,7 @@ import {
   View,
 } from 'react-native';
 import { Card } from '@/components/Card';
+import { DifficultyAmountExplorer } from '@/components/DifficultyAmountExplorer';
 import { DifficultyBadge } from '@/components/DifficultyBadge';
 import { ProgressBar } from '@/components/ProgressBar';
 import { TopBar } from '@/components/TopBar';
@@ -20,16 +21,18 @@ import { useAppSelectionStore } from '@/store/useAppSelectionStore';
 import { useAppsStore } from '@/store/useAppsStore';
 import { useAuthStore } from '@/store/useAuthStore';
 import { colors, radius, spacing, typography } from '@/theme/tokens';
+import type { RewardMethod } from '@/types';
 
-const CATEGORY_ICONS: { icon: keyof typeof MaterialIcons.glyphMap; label: string }[] = [
-  { icon: 'event-available', label: '출석체크' },
-  { icon: 'play-circle-filled', label: '광고보기' },
-  { icon: 'directions-walk', label: '걷기' },
-  { icon: 'assignment', label: '설문조사' },
-  { icon: 'quiz', label: '퀴즈' },
-  { icon: 'shopping-bag', label: '쇼핑' },
-  { icon: 'credit-card', label: '카드혜택' },
-  { icon: 'account-balance', label: '은행 이벤트' },
+// Each tile filters the Search tab by its matching reward method — dropped
+// the design mock's 카드혜택/은행 이벤트 tiles since those aren't a
+// reward_method our data model supports, so there's nothing real to link to.
+const CATEGORY_ICONS: { icon: keyof typeof MaterialIcons.glyphMap; label: string; method: RewardMethod }[] = [
+  { icon: 'event-available', label: '출석체크', method: '출석체크' },
+  { icon: 'play-circle-filled', label: '광고보기', method: '광고 시청' },
+  { icon: 'directions-walk', label: '걷기', method: '걷기' },
+  { icon: 'assignment', label: '설문조사', method: '설문' },
+  { icon: 'quiz', label: '퀴즈', method: '퀴즈' },
+  { icon: 'shopping-bag', label: '쇼핑', method: '쇼핑' },
 ];
 
 export default function HomeScreen() {
@@ -51,7 +54,7 @@ export default function HomeScreen() {
 
   return (
     <View style={styles.flex}>
-      <TopBar title="앱테크 허브" leftIcon="grid-view" rightIcon="notifications" />
+      <TopBar title="앱테크 허브" leftIcon="grid-view" onLeftPress={() => router.push('/(tabs)/search')} />
       <ScrollView contentContainerStyle={styles.content}>
         {/* Hero: 오늘 받을 수 있는 혜택 */}
         <View style={styles.section}>
@@ -81,17 +84,29 @@ export default function HomeScreen() {
           </Card>
         </View>
 
-        {/* Category grid (decorative, mirrors design) */}
+        {/* 난이도별 받을 수 있는 금액 */}
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>난이도별 받을 수 있는 금액</Text>
+          <Card>
+            <DifficultyAmountExplorer />
+          </Card>
+        </View>
+
+        {/* Category grid — taps into Search filtered by reward method */}
         <View style={styles.categoryGrid}>
           {CATEGORY_ICONS.map((item) => (
-            <View key={item.label} style={styles.categoryItem}>
+            <Pressable
+              key={item.label}
+              style={({ pressed }) => [styles.categoryItem, pressed && styles.pressed]}
+              onPress={() => router.push(`/(tabs)/search?category=${encodeURIComponent(item.method)}`)}
+            >
               <View style={styles.categoryIconWrap}>
                 <MaterialIcons name={item.icon} size={26} color={colors.primary} />
               </View>
               <Text style={styles.categoryLabel} numberOfLines={1}>
                 {item.label}
               </Text>
-            </View>
+            </Pressable>
           ))}
         </View>
 
@@ -136,24 +151,26 @@ export default function HomeScreen() {
 
         {/* 실시간 인기 이벤트 */}
         <View style={styles.section}>
-          <View style={styles.sectionHeaderRow}>
+          <Pressable style={styles.sectionHeaderRow} onPress={() => router.push('/(tabs)/events')}>
             <Text style={styles.sectionTitle}>실시간 인기 이벤트</Text>
             <MaterialIcons name="chevron-right" size={20} color={colors.onSurfaceVariant} />
-          </View>
+          </Pressable>
           <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ marginHorizontal: -spacing.containerPadding }}>
             <View style={styles.eventScrollRow}>
               {mockEvents.slice(0, 3).map((event, idx) => (
-                <View
+                <Pressable
                   key={event.id}
-                  style={[
+                  style={({ pressed }) => [
                     styles.eventPromoCard,
                     { backgroundColor: [colors.primaryContainer, colors.tertiaryContainer, colors.onSurfaceVariant][idx % 3] },
+                    pressed && styles.pressed,
                   ]}
+                  onPress={() => router.push('/(tabs)/events')}
                 >
                   <Text style={styles.eventPromoTag}>{event.tag}</Text>
                   <Text style={styles.eventPromoTitle}>{event.title}</Text>
                   <Text style={styles.eventPromoSub}>{event.time_left_label}</Text>
-                </View>
+                </Pressable>
               ))}
             </View>
           </ScrollView>
@@ -164,20 +181,24 @@ export default function HomeScreen() {
           <Text style={styles.sectionTitle}>오늘 종료되는 이벤트</Text>
           <View style={{ gap: spacing.gutter }}>
             {mockEvents.filter((e) => e.urgent).map((event) => (
-              <View key={event.id} style={styles.endingRow}>
+              <Pressable
+                key={event.id}
+                style={({ pressed }) => [styles.endingRow, pressed && styles.pressed]}
+                onPress={() => router.push('/(tabs)/events')}
+              >
                 <View style={styles.endingThumb}>
                   <MaterialIcons name="local-fire-department" size={24} color={colors.primary} />
                 </View>
                 <View style={styles.appRowInfo}>
                   <View style={styles.endingBadgeRow}>
-                    <Text style={styles.endingBadge}>D-Day</Text>
+                    <Text style={styles.endingBadge}>{event.tag}</Text>
                     <Text style={styles.endingTime}>{event.time_left_label}</Text>
                   </View>
                   <Text style={styles.appRowName}>{event.title}</Text>
                   <Text style={styles.appRowMeta}>{event.brand}</Text>
                 </View>
                 <MaterialIcons name="chevron-right" size={22} color={colors.outlineVariant} />
-              </View>
+              </Pressable>
             ))}
           </View>
         </View>
